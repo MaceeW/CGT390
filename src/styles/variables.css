@@ -1,24 +1,23 @@
-:root{
-    --color-primary: #3498db;
-    --color-secondary: #2ecc71;
-    --color-background: #f5f5f5;
-    --color-text: #333333;
-    
-    --font-family-base: 'Helvetica Neue', Arial, sans-serif;
-    --font-size-base: 16px;
-    --line-height-base: 1.5;
-    
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    
-    --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --border-radius-lg: 16px;
-    
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+:root {
+  --primary-background-color: #f7f7f7;
+  --secondary-backrgound-color: #646cff;
+  --third-background-color: #ffffff;
+  --dark-background-color: #191a1a;
+  --text-color: #191a1a;
+  --dark-text-color: #ffffff;
+  --button-background-color: #1a1a1a;
+  --button-text-color: #ffffff;
+  --button-hover-background-color: var(--primary-background-color);
+  --button-hover-text-color: #191a1a;
+  --button-border-color: #ccc;
+  --link-color: #646cff;
+  --link-hover-color: var(--text-color);
+  --font-family: "Roboto", sans-serif;
+  --mobile: 768px;
+  --tablet: 1024px;
+  --border-radius: 8px;
+  --border-color: #e0e0e0;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --success-color: #2ecc71;
+  --error-color: #e74c3c;
 }

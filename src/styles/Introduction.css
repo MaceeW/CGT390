@@ -1,8 +1,7 @@
-.introduction {
-  font-size: 18px;
-  line-height: 1.6;
-  margin: 20px auto;
-  max-width: 600px;
-  text-align: center;
-  color: #333;
+h2 {
+  color: lightcoral;
+}
+
+p {
+  color: lightcoral;
 }

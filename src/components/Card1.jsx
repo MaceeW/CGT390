@@ -1,7 +1,9 @@
-import PropTypes from "prop-types";
+import img from "../assets/ProfileBar.jpg";
 
-const Card = ({name, title, email, img}) => {
-   
+const Card1 = () => {
+  const name = "Dan";
+  const title = "UX Designer";
+  const email = "a@a.com";
   return (
     <div className="profile-card">
       <div className="profile-card__image">
@@ -18,10 +20,4 @@ const Card = ({name, title, email, img}) => {
   );
 };
 
-Card.propTypes ={
-    name: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
-}
-export default Card;
+export default Card1;
