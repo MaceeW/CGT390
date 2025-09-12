@@ -4,10 +4,10 @@ const Card = ({name, title, email, img}) => {
    
   return (
     <div className="profile-card">
-      <div className="profile-card__image">
+      <div className="profile-card_image">
         <img src={img} alt={name} />
       </div>
-      <div className="profile-card__content">
+      <div className="profile-card_content">
         <p>{name}</p>
         <p>{title}</p>
         <p>
@@ -19,7 +19,7 @@ const Card = ({name, title, email, img}) => {
 };
 
 Card.propTypes ={
-    name: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired

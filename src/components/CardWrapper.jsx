@@ -1,9 +1,9 @@
-const Wrapper = ({ children }) => {
+const CardWrapper = ({ children, id }) => {
   return (
-    <div className="section">
+    <div className="section" id={id}>
       <div className="container">{children}</div>
     </div>
   );
 };
 
-export default Wrapper;
+export default CardWrapper;

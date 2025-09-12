@@ -1,13 +1,3 @@
-@keyframes cardEnter {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 .profile-card {
   background-color: tan;
   border-radius: 50px;
@@ -16,21 +6,9 @@
   box-shadow: var(--box-shadow);
   margin: 0.75rem;
   overflow: hidden;
-  &.is-entering {
-    opacity: 0;
-    transform: scale(0.9);
-    animation: cardEnter 0.5s forwards;  
-  }
+}
 
-  .profile-card__image {
-    width: 90%;
-    padding-top: 90%;
-    border-radius: 50%;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-  }
-  img {
+.profile-card img {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -38,13 +16,14 @@
     left: 0;
     object-fit: cover;
   }
-  .profile-card__content{
+
+.profile-card_content {
     padding: 1rem;
-    p {
-      margin: 0;
-      color: darkblue;
-    }
-  }
+}
+
+.profile-card_content p {
+  margin: 0;
+  color: darkblue;
 }
 .centered-flex-container {
   background-color: rgba(255, 255, 255, 0.25);

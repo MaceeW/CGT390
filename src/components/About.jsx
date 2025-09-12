@@ -1,4 +1,4 @@
-import "../styles/Introduction.css";
+import "../styles/About.css";
 
 const Introduction = () => {
   return (
