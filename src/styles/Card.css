@@ -1,3 +1,14 @@
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .profile-card {
   background-color: tan;
   border-radius: 50px;
@@ -6,6 +17,11 @@
   box-shadow: var(--box-shadow);
   margin: 0.75rem;
   overflow: hidden;
+  &.is-entering {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: cardEnter 0.5s forwards; 
+  }
 }
 
 .profile-card img {

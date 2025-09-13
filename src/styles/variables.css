@@ -1,23 +1,36 @@
 :root {
+  --light-gradient: linear-gradient(to right, #646cff, #98c6ff);
   --primary-background-color: #f7f7f7;
   --secondary-backrgound-color: #646cff;
   --third-background-color: #ffffff;
   --dark-background-color: #191a1a;
   --text-color: #191a1a;
+  --card-bg: var(--third-background-color);
+  --button-bg: var(--secondary-backrgound-color);
+  --button-text: #ffffff;
+  --accent-color: #007bff;
+  --card-border: #e0e0e0;
+
+  --dark-gradient: linear-gradient(to right, #81D8D0, #FFD580);;
   --dark-text-color: #ffffff;
-  --button-background-color: #1a1a1a;
-  --button-text-color: #ffffff;
-  --button-hover-background-color: var(--primary-background-color);
-  --button-hover-text-color: #191a1a;
-  --button-border-color: #ccc;
-  --link-color: #646cff;
-  --link-hover-color: var(--text-color);
-  --font-family: "Roboto", sans-serif;
-  --mobile: 768px;
-  --tablet: 1024px;
-  --border-radius: 8px;
-  --border-color: #e0e0e0;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --success-color: #2ecc71;
-  --error-color: #e74c3c;
+  --dark-card-bg: #2d2d2d;
+  --dark-card-border: #444;
+  --dark-accent-color: #8bb8ff;
+  --dark-button-bg: #0056b3;
+}
+
+body.lightMode {
+  background: var(--light-gradient);
+  color: var(--text-color);
+  --card-bg: var(--third-background-color);
+  --card-border: #e0e0e0;
+  --accent-color: #007bff;
+}
+
+body.darkMode {
+  background: var(--dark-gradient);
+  color: var(--dark-text-color);
+  --card-bg: var(--dark-card-bg);
+  --card-border: var(--dark-card-border);
+  --accent-color: var(--dark-accent-color);
 }

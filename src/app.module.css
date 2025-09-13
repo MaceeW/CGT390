@@ -1,0 +1,55 @@
+.lightMode {
+  --background-color: #f0f2f5;
+  background-image: linear-gradient(to right, lightblue, rgb(244, 214, 157));
+  background-color: var(--background-color); 
+  --text-color: #333;
+  --text-color: rgb(55, 55, 185);
+  --navbar-bg: transparent;
+  --navbar-text: rgb(55, 55, 185);
+  --card-bg: transparent;
+  --card-border: #ddd;
+  --button-bg: #007bff;
+  --button-text: #fff;
+  --accent-color: #0056b3;
+}
+
+.darkMode {
+  --background-color: #1a1a1a;
+  background-image: linear-gradient(to right, #81D8D0, #FFD580);
+  background-color: var(--background-color); 
+  --text-color: rgb(101, 101, 101);
+  --navbar-bg: transparent;
+  --navbar-text: rgb(101, 101, 101);
+  --card-bg: transparent;
+  --card-border: #444;
+  --button-bg: #007bff;
+  --button-text: #f0f0f0;
+  --accent-color: #8bb8ff;
+}
+
+.app {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--navbar-bg); 
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1rem;
+}

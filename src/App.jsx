@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css'
 import Navbar from './components/Navbar'
 import About from './components/About'
@@ -12,6 +12,7 @@ import img4 from "./assets/img4.jpg"
 import img5 from "./assets/img5.jpg"
 import img6 from "./assets/img6.jpg"
 import Search from './components/Search';
+import styles from './App.module.css'
 
 function App() {
   const profiles = [
@@ -23,51 +24,64 @@ function App() {
     {name: "Bob", title: "Software Engineer", email: "bob@example.com", img: img3}
   ]
 
+  const [mode, setMode] = useState('light');
   const uniqueTitles = [...new Set(profiles.map(profile => profile.title))];
   
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterTitle, setFilterTitle] = useState("All");
+  const [filterTitle, setFilterTitle] = useState("");
 
   const handleReset = () => {
     setSearchTerm("");
-    setFilterTitle("All");
+    setFilterTitle("");
   };
 
   const filteredProfiles = profiles.filter(profile => {
     const nameMatch = profile.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const titleMatch = filterTitle === "All" || profile.title === filterTitle;
+    const titleMatch = filterTitle === "" || profile.title === filterTitle;
     return nameMatch && titleMatch;
   });
 
-  return (
-    <>
+  useEffect(() => {
+    document.body.className = mode === 'dark' ? styles.darkMode : styles.lightMode;
+    return () => {
+      document.body.className = '';
+    };
+  }, [mode, styles.darkMode, styles.lightMode]);
+
+   return (
+    <div className={styles.app}>
       <header>
-        <Navbar />
+        <Navbar mode={mode} setMode={setMode} />
       </header>
       <main>
-        <CardWrapper id="header">
+        <CardWrapper id="header" className={styles.cardWrapper}>
           <h1>Profile App</h1>
         </CardWrapper>
-        <CardWrapper id="about">
-             <About />
+        <CardWrapper id="about" className={styles.cardWrapper}>
+          <About />
         </CardWrapper>
-        <CardWrapper id="profiles">
-             <div className="controls">
-                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleReset={handleReset} />
-                <Filters titles={uniqueTitles} filterTitle={filterTitle} setFilterTitle={setFilterTitle} />
-             </div>
-             <div className="flex-container">
-              {
-                filteredProfiles.map((profile) => (
-                  <Card key={profile.email} name={profile.name} title={profile.title} email={profile.email} img={profile.img} />
-                ))
-              }   
-              </div>
+        <CardWrapper id="profiles" className={styles.cardWrapper}>
+          <div className={styles.controls}>
+            <Search 
+              searchTerm={searchTerm} 
+              setSearchTerm={setSearchTerm} 
+              handleReset={handleReset} />
+            <Filters 
+              titles={uniqueTitles} 
+              filterTitle={filterTitle} 
+              setFilterTitle={setFilterTitle} />
+          </div>
+          <div className={styles.flexContainer}>
+            {
+              filteredProfiles.map((profile) => (
+                <Card key={profile.email} name={profile.name} title={profile.title} email={profile.email} img={profile.img} />
+              ))
+            }
+          </div>
         </CardWrapper>
       </main>
-           
-    </>
-  )
+    </div>
+  );
 }
 
 export default App;

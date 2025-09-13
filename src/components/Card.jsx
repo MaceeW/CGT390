@@ -1,18 +1,14 @@
 import PropTypes from "prop-types";
+import styles from './card.module.css';
 
-const Card = ({name, title, email, img}) => {
-   
+const Card = ({ name, title, email, img }) => {
   return (
-    <div className="profile-card">
-      <div className="profile-card_image">
-        <img src={img} alt={name} />
-      </div>
-      <div className="profile-card_content">
-        <p>{name}</p>
-        <p>{title}</p>
-        <p>
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
+    <div className={styles.card}>
+      <img src={img} alt={`${name}'s profile`} className={styles.profileImage} />
+      <div className={styles.cardContent}>
+        <h3 className={styles.cardName}>{name}</h3>
+        <p className={styles.cardTitle}>{title}</p>
+        <p className={styles.cardEmail}>{email}</p>
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
+import styles from './cardwrapper.module.css';
+
 const CardWrapper = ({ children, id }) => {
   return (
-    <div className="section" id={id}>
-      <div className="container">{children}</div>
-    </div>
+    <section id={id} className={styles.cardWrapper}>
+      {children}
+    </section>
   );
 };
 
