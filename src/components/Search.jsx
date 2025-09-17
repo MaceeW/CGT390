@@ -1,18 +1,16 @@
-import styles from './Search.module.css';
+import styles from './search.module.css';
 
-const Search = ({ searchTerm, handleReset, setSearchTerm }) => {
+const Search = ({ searchTerm, onSearchChange, onReset }) => {
   return (
     <div className={styles.searchContainer}>
       <input
         type="text"
         placeholder="Search by name..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={onSearchChange}
         className={styles.searchInput}
       />
-      <button onClick={handleReset} className={styles.resetButton}>
-        Reset
-      </button>
+      <button onClick={onReset} className={styles.resetButton}>Reset</button>
     </div>
   );
 };

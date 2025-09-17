@@ -13,7 +13,8 @@ import img5 from "./assets/img5.jpg"
 import img6 from "./assets/img6.jpg"
 import Search from './components/Search';
 import styles from './App.module.css'
-
+import AddProfile from "./components/AddProfile"; 
+ 
 function App() {
   const profiles = [
     {name: "John", title: "Software Engineer", email: "john@example.com", img: img2},
@@ -23,31 +24,34 @@ function App() {
     {name: "Alice", title: "Project Manager", email: "alice@example.com", img: img6},
     {name: "Bob", title: "Software Engineer", email: "bob@example.com", img: img3}
   ]
+ 
+  const titles = [...new Set(profiles.map(profile => profile.title))]
+  const [title, setTitle] = useState("")
+  const [search, setSearch] = useState("")
+  const [mode, setMode] = useState("light")
 
-  const [mode, setMode] = useState('light');
-  const uniqueTitles = [...new Set(profiles.map(profile => profile.title))];
-  
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterTitle, setFilterTitle] = useState("");
-
-  const handleReset = () => {
-    setSearchTerm("");
-    setFilterTitle("");
-  };
-
-  const filteredProfiles = profiles.filter(profile => {
-    const nameMatch = profile.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const titleMatch = filterTitle === "" || profile.title === filterTitle;
-    return nameMatch && titleMatch;
-  });
+  const changeMode = () => {
+    setMode(mode==="dark"?"light":"dark")
+  }
+  const handleChange = (event) => {
+    setTitle(event.target.value)
+  }
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+  }
+  const handleClick = () => {
+    setTitle("")
+    setSearch("")
+  }
+  const filteredProfiles = profiles.filter(profile => 
+    (!title || profile.title===title) && profile.name.toLowerCase().includes(search.toLowerCase())
+  )
 
   useEffect(() => {
     document.body.className = mode === 'dark' ? styles.darkMode : styles.lightMode;
-    return () => {
-      document.body.className = '';
-    };
-  }, [mode, styles.darkMode, styles.lightMode]);
-
+    return () => { document.body.className = ''; };
+  }, [mode]);
+ 
    return (
     <div className={styles.app}>
       <header>
@@ -63,13 +67,13 @@ function App() {
         <CardWrapper id="profiles" className={styles.cardWrapper}>
           <div className={styles.controls}>
             <Search 
-              searchTerm={searchTerm} 
-              setSearchTerm={setSearchTerm} 
-              handleReset={handleReset} />
+              searchTerm={search}
+              onSearchChange={handleSearch}
+              onReset={handleClick} />
             <Filters 
-              titles={uniqueTitles} 
-              filterTitle={filterTitle} 
-              setFilterTitle={setFilterTitle} />
+              titles={titles}
+              selectedTitle={title}
+              onTitleChange={handleChange} />
           </div>
           <div className={styles.flexContainer}>
             {
@@ -78,6 +82,9 @@ function App() {
               ))
             }
           </div>
+        </CardWrapper>
+        <CardWrapper id="add-profile" className={styles.cardWrapper}>
+          <AddProfile />
         </CardWrapper>
       </main>
     </div>

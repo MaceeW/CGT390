@@ -1,0 +1,70 @@
+.add-profile {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.add-profile h2 {
+  margin-top: 0;
+}
+
+.add-profile label {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.add-profile input[type="text"],
+.add-profile input[type="email"],
+.add-profile textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.add-profile button {
+  margin-top: 12px;
+  display:block;
+}
+.add-profile .success-message {
+  color: green;
+  margin-top: 10px;
+}
+
+.add-profile form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.add-profile form input[type="text"],
+.add-profile form input[type="email"],
+.add-profile form textarea {
+  width: 100%; 
+  max-width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.add-profile form button {
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  transition: background-color 0.3s ease;
+}
+
+.add-profile form button:hover {
+  background-color: var(--accent-color);
+}
+
+.add-profile .error-message {
+  color: red;
+  margin-top: 10px;
+}

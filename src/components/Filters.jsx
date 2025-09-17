@@ -1,16 +1,16 @@
 import styles from './filters.module.css';
 
-const Filters = ({ titles, filterTitle, setFilterTitle }) => {
+const Filters = ({ titles, selectedTitle, onTitleChange }) => {
 
    return (
     <div className={styles.filtersContainer}>
       <label htmlFor="title-filter" className={styles.filterLabel}>
         Filter by Title:
       </label>
-      <select 
-        id="title-filter" 
-        onChange={(e) => setFilterTitle(e.target.value)} 
-        value={filterTitle}
+      <select
+        id="title-filter"
+        onChange={onTitleChange}
+        value={selectedTitle}
         className={styles.filterSelect}
       >
         <option value="">All Titles</option>
