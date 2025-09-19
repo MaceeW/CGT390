@@ -1,4 +1,4 @@
-import styles from './filters.module.css';
+import styles from '../styles/filters.module.css';
 
 const Filters = ({ titles, selectedTitle, onTitleChange }) => {
 

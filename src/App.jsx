@@ -5,31 +5,29 @@ import About from './components/About'
 import Card from './components/Card'
 import CardWrapper from './components/CardWrapper'
 import Filters from './components/Filters'
-import img1 from "./assets/img1.jpg"
-import img2 from "./assets/img2.webp"
-import img3 from "./assets/img3.jpeg"
-import img4 from "./assets/img4.jpg"
-import img5 from "./assets/img5.jpg"
-import img6 from "./assets/img6.jpg"
 import Search from './components/Search';
 import styles from './App.module.css'
 import AddProfile from "./components/AddProfile"; 
  
 function App() {
-  const profiles = [
-    {name: "John", title: "Software Engineer", email: "john@example.com", img: img2},
-    {name: "Jane", title: "Product Manager", email: "jane@example.com", img: img1},
-    {name: "Charlie", title: "Software Engineer", email: "charlie@example.com", img: img4},
-    {name: "Dan", title: "UX Designer", email: "dan@example.com", img: img5},
-    {name: "Alice", title: "Project Manager", email: "alice@example.com", img: img6},
-    {name: "Bob", title: "Software Engineer", email: "bob@example.com", img: img3}
-  ]
- 
-  const titles = [...new Set(profiles.map(profile => profile.title))]
+  const [profiles, setProfiles] = useState([]);
+  const [titles, setTitles] = useState([]);
   const [title, setTitle] = useState("")
   const [search, setSearch] = useState("")
   const [mode, setMode] = useState("light")
+  
+  useEffect(() => {
+    fetch('https://web.ics.purdue.edu/~zong6/profile-app/fetch-data.php')
+      .then(response => response.json())
+      .then(data => setProfiles(data))
+      .catch(error => console.error('Error fetching profiles:', error));
 
+    fetch('https://web.ics.purdue.edu/~zong6/profile-app/get-titles.php')
+      .then(response => response.json())
+      .then(data => setTitles(data.titles))
+      .catch(error => console.error('Error fetching titles:', error));
+  }, []);
+  
   const changeMode = () => {
     setMode(mode==="dark"?"light":"dark")
   }
@@ -78,7 +76,7 @@ function App() {
           <div className={styles.flexContainer}>
             {
               filteredProfiles.map((profile) => (
-                <Card key={profile.email} name={profile.name} title={profile.title} email={profile.email} img={profile.img} />
+                <Card key={profile.id} name={profile.name} title={profile.title} email={profile.email} img={profile.image_url} />
               ))
             }
           </div>

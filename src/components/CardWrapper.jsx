@@ -1,4 +1,4 @@
-import styles from './cardwrapper.module.css';
+import styles from '../styles/cardwrapper.module.css';
 
 const CardWrapper = ({ children, id }) => {
   return (
