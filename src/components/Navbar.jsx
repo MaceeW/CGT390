@@ -1,4 +1,5 @@
 import styles from '../styles/navbar.module.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ mode, setMode }) => {
   const toggleMode = () => {
@@ -8,9 +9,9 @@ const Navbar = ({ mode, setMode }) => {
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navList}>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#profiles">Profiles</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/addprofile">Add Profile</Link></li>
       </ul>
       <button onClick={toggleMode} className={styles.modeButton}>
         {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
