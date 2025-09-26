@@ -10,6 +10,7 @@ const Navbar = ({ mode, setMode }) => {
     <nav className={styles.navbar}>
       <ul className={styles.navList}>
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/fetched-profiles">Profiles</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/addprofile">Add Profile</Link></li>
       </ul>

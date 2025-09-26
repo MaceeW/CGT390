@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import '../styles/addProfile.css';
 
 const stripTags = (s) => String(s ?? "").replace(/<\/?[^>]+>/g, "");
@@ -13,33 +14,16 @@ const AddProfile = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const navigate = useNavigate(); 
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    if (!name || !title || !email) {
-      setError("Name, Title, and Email are required fields.");
-      return;
-    }
-
-    const sanitizedProfile = {
-      name: trimCollapse(stripTags(name)),
-      title: trimCollapse(stripTags(title)),
-      email: trimCollapse(stripTags(email)),
-      bio: trimCollapse(stripTags(bio)),
-      img
-    };
-
-    console.log("Submitting sanitized profile:", sanitizedProfile);
-    setSuccess("Profile added successfully!");
-
     setName("");
     setTitle("");
     setEmail("");
-    setEmail("");
-    setImg(null);
+    setBio(""); 
     e.target.reset();
+
+    navigate("/", { replace: true });
   };
 
   return (

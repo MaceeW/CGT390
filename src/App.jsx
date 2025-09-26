@@ -6,6 +6,8 @@ import CardWrapper from './components/CardWrapper';
 import styles from './App.module.css';
 import AddProfile from "./components/AddProfile"; 
 import HomePage from './pages/HomePage';
+import FetchedProfilesPage from './pages/FetchedProfilesPage'; 
+import ProfileDetail from './pages/ProfileDetail'; 
 import NotFound from './pages/NotFound';
 import { Routes, Route } from "react-router-dom";
  
@@ -17,7 +19,7 @@ function App() {
     return () => { document.body.className = ''; };
   }, [mode]);
  
-   return (
+     return (
     <div className={styles.app}>
       <header>
         <Navbar mode={mode} setMode={setMode} />
@@ -28,6 +30,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/addprofile" element={<AddProfile />} />
+            <Route path="/fetched-profiles" element={<FetchedProfilesPage />}>
+              <Route path="profile/:profileId" element={<ProfileDetail />} />
+            </Route>
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </CardWrapper>
