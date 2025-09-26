@@ -50,9 +50,6 @@ const ProfileDetail = () => {
       <p><strong>Title:</strong> {profile.title}</p>
       <p><strong>Email:</strong> {profile.email}</p>
       <p><strong>Bio:</strong> {profile.bio}</p>
-      <p style={{ fontSize: '0.8rem', opacity: '0.7' }}>
-        <em>(Note: Data is mocked for demonstration. In a real app, data for ID {profileId} would be fetched from: https://web.ics.purdue.edu/~zong6/profile-app/fetch-data-with-id.php?id={profileId})</em>
-      </p>
     </div>
   );
 };
