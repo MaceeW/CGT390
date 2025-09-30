@@ -3,11 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { HashRouter } from 'react-router-dom'
+import { ModeProvider } from './context/ModeContext.jsx'; 
+import { ProfileProvider } from './context/ProfileContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HashRouter>
-      <App />
+      <ModeProvider>
+        <ProfileProvider>
+          <App />
+        </ProfileProvider>
+      </ModeProvider>
     </HashRouter>
   </StrictMode>,
 )

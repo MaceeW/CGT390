@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styles from '../styles/card.module.css';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom'; 
 
 const Card = ({ id, name, title, email, img }) => {
   return (
@@ -18,7 +18,7 @@ const Card = ({ id, name, title, email, img }) => {
 };
 
 Card.propTypes ={
-    id: PropTypes.string.isRequired, // Added id prop
+    id: PropTypes.string.isRequired, 
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

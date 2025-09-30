@@ -12,26 +12,19 @@ const ProfileDetail = () => {
       setLoading(true);
       setError(null);
       try {
-        console.log(`Attempting to fetch profile details for ID: ${profileId} from API: https://web.ics.purdue.edu/~zong6/profile-app/fetch-data-with-id.php?id=${profileId}`);
-        
-        const mockData = [
-          {id: "2", name: "John", title: "Software Engineer", email: "john@example.com", bio: "Skilled React developer."},
-          {id: "1", name: "Jane", title: "Product Manager", email: "jane@example.com", bio: "Strategist with a focus on user experience."},
-          {id: "4", name: "Charlie", title: "Software Engineer", email: "charlie@example.com", bio: "Backend expert and data enthusiast."},
-          {id: "5", name: "Dan", title: "UX Designer", email: "dan@example.com", bio: "Visual and interaction design guru."},
-          {id: "6", name: "Alice", title: "Project Manager", email: "alice@example.com", bio: "Manages projects with precision and care."},
-          {id: "3", name: "Bob", title: "Software Engineer", email: "bob@example.com", bio: "Front-end specialist and component architect."}
-        ];
-        
-        const foundProfile = mockData.find(p => p.id === profileId);
+        const response = await fetch(`https://web.ics.purdue.edu/~zong6/profile-app/fetch-data-with-id.php?id=${profileId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
 
-        if (foundProfile) {
-          setProfile(foundProfile);
+        if (data) {
+          setProfile(data);
         } else {
           setError("Profile not found.");
         }
       } catch (e) {
-        setError("Failed to fetch profile data.");
+        setError("Failed to fetch profile data. " + e.message);
       } finally {
         setLoading(false);
       }

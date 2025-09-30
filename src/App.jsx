@@ -1,35 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import About from './components/About';
+import AboutPage from './pages/About';
 import CardWrapper from './components/CardWrapper';
 import styles from './App.module.css';
-import AddProfile from "./components/AddProfile"; 
+import AddProfilePage from "./pages/AddProfilePage"; 
 import HomePage from './pages/HomePage';
 import FetchedProfilesPage from './pages/FetchedProfilesPage'; 
 import ProfileDetail from './pages/ProfileDetail'; 
 import NotFound from './pages/NotFound';
 import { Routes, Route } from "react-router-dom";
+import ModeContext from './context/ModeContext';
  
 function App() {
-  const [mode, setMode] = useState("light");
-
-  useEffect(() => {
-    document.body.className = mode === 'dark' ? styles.darkMode : styles.lightMode;
-    return () => { document.body.className = ''; };
-  }, [mode]);
+  const { mode } = useContext(ModeContext);
  
      return (
     <div className={styles.app}>
       <header>
-        <Navbar mode={mode} setMode={setMode} />
+        <Navbar />
       </header>
       <main>
         <CardWrapper id="header" className={styles.cardWrapper}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/addprofile" element={<AddProfile />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/addprofile" element={<AddProfilePage />} />
             <Route path="/fetched-profiles" element={<FetchedProfilesPage />}>
               <Route path="profile/:profileId" element={<ProfileDetail />} />
             </Route>

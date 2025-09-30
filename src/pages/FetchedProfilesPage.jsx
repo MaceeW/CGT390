@@ -1,76 +1,103 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Card from '../components/Card';
 import Filters from '../components/Filters';
-import img1 from "../assets/img1.jpg";
-import img2 from "../assets/img2.webp";
-import img3 from "../assets/img3.jpeg";
-import img4 from "../assets/img4.jpg";
-import img5 from "../assets/img5.jpg";
-import img6 from "../assets/img6.jpg";
 import Search from '../components/Search';
 import styles from '../App.module.css';
 import { Outlet } from 'react-router-dom'; 
 
 const FetchedProfilesPage = () => {
-    const profiles = [
-      {id: "2", name: "John", title: "Software Engineer", email: "john@example.com", img: img2},
-      {id: "1", name: "Jane", title: "Product Manager", email: "jane@example.com", img: img1},
-      {id: "4", name: "Charlie", title: "Software Engineer", email: "charlie@example.com", img: img4},
-      {id: "5", name: "Dan", title: "UX Designer", email: "dan@example.com", img: img5},
-      {id: "6", name: "Alice", title: "Project Manager", email: "alice@example.com", img: img6},
-      {id: "3", name: "Bob", title: "Software Engineer", email: "bob@example.com", img: img3}
-    ];
-  
-    const titles = [...new Set(profiles.map(profile => profile.title))];
+    const [profiles, setProfiles] = useState([]);
+    const [titles, setTitles] = useState([]);
     const [title, setTitle] = useState("");
     const [search, setSearch] = useState("");
-  
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const fetchProfiles = useCallback(async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const url = new URL('https://web.ics.purdue.edu/~zong6/profile-app/fetch-data-with-filter.php');
+        url.searchParams.append('limit', 10);
+        if (title) url.searchParams.append('title', title);
+        if (search) url.searchParams.append('name', search);
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProfiles(Array.isArray(data.profiles) ? data.profiles : []);
+      } catch (e) {
+        setError("Failed to fetch profiles.");
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    }, [title, search]);
+
+    useEffect(() => {
+      fetchProfiles();
+    }, [fetchProfiles]);
+
+    useEffect(() => {
+      const fetchTitles = async () => {
+        try {
+          const response = await fetch('https://web.ics.purdue.edu/~zong6/profile-app/get-titles.php');
+          const data = await response.json();
+          setTitles(Array.isArray(data.titles) ? data.titles : []);
+        } catch (e) {
+          console.error("Failed to fetch titles:", e);
+        }
+      };
+      fetchTitles();
+    }, []);
+
     const handleChange = (event) => {
       setTitle(event.target.value);
     };
-  
+
     const handleSearch = (event) => {
       setSearch(event.target.value);
     };
-  
+
     const handleClick = () => {
       setTitle("");
       setSearch("");
     };
-  
-    const filteredProfiles = profiles.filter(profile => 
-      (!title || profile.title === title) && profile.name.toLowerCase().includes(search.toLowerCase())
-    );
-  
+
     return (
       <>
         <h1>Fetched Profiles</h1>
         <div className={styles.controls}>
-          <Search 
+          <Search
             searchTerm={search}
             onSearchChange={handleSearch}
-            onReset={handleClick} 
+            onReset={handleClick}
           />
-          <Filters 
+          <Filters
             titles={titles}
             selectedTitle={title}
-            onTitleChange={handleChange} 
+            onTitleChange={handleChange}
           />
         </div>
+        {loading && <div>Loading profiles...</div>}
+        {error && <div style={{ color: 'red' }}>{error}</div>}
         <div className={styles.flexContainer}>
           {
-            filteredProfiles.map((profile) => (
-              <Card 
-                key={profile.email} 
-                id={profile.id} 
-                title={profile.title} 
-                email={profile.email} 
-                img={profile.img} 
+            !loading && !error && profiles.map((profile) => (
+              <Card
+                key={profile.id}
+                id={profile.id}
+                name={profile.name}
+                title={profile.title}
+                email={profile.email}
+                img={profile.image_url}
               />
             ))
           }
         </div>
-        <Outlet /> 
+        <Outlet />
       </>
     );
   };

@@ -1,10 +1,10 @@
+import { useContext } from 'react';
 import styles from '../styles/navbar.module.css';
 import { Link } from 'react-router-dom';
+import ModeContext from '../context/ModeContext';
 
-const Navbar = ({ mode, setMode }) => {
-  const toggleMode = () => {
-    setMode(mode === 'light' ? 'dark' : 'light');
-  };
+const Navbar = () => {
+  const { mode, setMode } = useContext(ModeContext);
 
   return (
     <nav className={styles.navbar}>
@@ -14,7 +14,7 @@ const Navbar = ({ mode, setMode }) => {
         <li><Link to="/about">About</Link></li>
         <li><Link to="/addprofile">Add Profile</Link></li>
       </ul>
-      <button onClick={toggleMode} className={styles.modeButton}>
+      <button onClick={setMode} className={styles.modeButton}>
         {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
       </button>
     </nav>
