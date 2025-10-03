@@ -26,9 +26,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/addprofile" element={<AddProfilePage />} />
-            <Route path="/fetched-profiles" element={<FetchedProfilesPage />}>
-              <Route path="profile/:profileId" element={<ProfileDetail />} />
-            </Route>
+            <Route path="/fetched-profiles" element={<FetchedProfilesPage />} />
+            <Route path="/fetched-profiles/profile/:profileId" element={<ProfileDetail />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

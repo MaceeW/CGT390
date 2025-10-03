@@ -1,39 +1,76 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ProfileContext from '../context/ProfileContext';
-import '../styles/addProfile.css';
+import { useReducer, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileContext from "../context/ProfileContext";
+import styles from "../styles/addProfile.module.css";
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_FIELD':
+      return { ...state, [action.field]: action.value };
+    case 'RESET_FORM':
+      return { name: '', title: '', email: '', bio: '' };
+    default:
+      return state;
+  }
+};
 
 const AddProfilePage = () => {
-  const [name, setName] = useState('');
-  const [title, setTitle] = useState('');
-  const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
+  const [formState, dispatch] = useReducer(formReducer, {
+    name: '',
+    title: '',
+    email: '',
+    bio: '',
+  });
   const { addProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !title || !email) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    addProfile({ name, title, email, bio });
-    navigate('/fetched-profiles');
+    const { name, title, email, bio } = formState;
+
+    const newProfile = {
+      id: Date.now(),
+      name,
+      title,
+      email,
+      bio,
+      image_url: "https://via.placeholder.com/150",
+    };
+
+    addProfile(newProfile);
+    dispatch({ type: 'RESET_FORM' });
+    navigate("/fetched-profiles");
+  };
+
+  const handleChange = (e) => {
+    dispatch({
+      type: 'UPDATE_FIELD',
+      field: e.target.name,
+      value: e.target.value,
+    });
   };
 
   return (
-    <div className="add-profile">
+    <div className={styles.formContainer}>
       <h2>Add New Profile</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-        <label htmlFor="title">Title:</label>
-        <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <label htmlFor="bio">Bio:</label>
-        <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
-        <button type="submit">Add Profile</button>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Name</label>
+          <input type="text" id="name" name="name" value={formState.name} onChange={handleChange} required />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="title">Title</label>
+          <input type="text" id="title" name="title" value={formState.title} onChange={handleChange} required />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" value={formState.email} onChange={handleChange} required />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="bio">Bio</label>
+          <textarea id="bio" name="bio" value={formState.bio} onChange={handleChange} />
+        </div>
+        <button type="submit" className={styles.submitButton}>Add Profile</button>
       </form>
     </div>
   );

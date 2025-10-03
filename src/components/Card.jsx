@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ id, name, title, email, img }) => {
   return (
-    <Link to={`profile/${id}`} className={styles.cardLink}>
+    <Link to={`/fetched-profiles/profile/${id}`} className={styles.cardLink}>
       <div className={styles.card}>
         <img src={img} alt={`${name}'s profile`} className={styles.profileImage} />
         <div className={styles.cardContent}>
@@ -18,7 +18,7 @@ const Card = ({ id, name, title, email, img }) => {
 };
 
 Card.propTypes ={
-    id: PropTypes.string.isRequired, 
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, 
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
