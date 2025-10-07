@@ -1,9 +1,12 @@
 import styles from '../styles/filters.module.css';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 const Filters = ({ titles, selectedTitle, onTitleChange }) => {
+  useEffect(() => {
+    console.log('Filters rendered');
+  }, []);
 
-   return (
+  return (
     <div className={styles.filtersContainer}>
       <label htmlFor="title-filter" className={styles.filterLabel}>
         Filter by Title:
