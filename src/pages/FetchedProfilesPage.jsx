@@ -34,7 +34,7 @@ const FetchedProfilesPage = () => {
       } finally {
         setLoading(false);
       }
-    }, [title, search]);
+    }, [title, search]); 
 
     useEffect(() => {
       fetchProfiles();
@@ -53,18 +53,18 @@ const FetchedProfilesPage = () => {
       fetchTitles();
     }, []);
 
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
       setTitle(event.target.value);
-    };
+    }, []); 
 
-    const handleSearch = (event) => {
+    const handleSearch = useCallback((event) => {
       setSearch(event.target.value);
-    };
+    }, []); 
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
       setTitle("");
       setSearch("");
-    };
+    }, []); 
 
     return (
       <>

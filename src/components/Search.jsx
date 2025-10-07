@@ -1,4 +1,5 @@
 import styles from '../styles/search.module.css';
+import { memo } from 'react';
 
 const Search = ({ searchTerm, onSearchChange, onReset }) => {
   return (
@@ -15,4 +16,4 @@ const Search = ({ searchTerm, onSearchChange, onReset }) => {
   );
 };
 
-export default Search;
+export default memo(Search);

@@ -1,22 +1,23 @@
-import { useContext } from 'react';
+import { useContext, lazy, Suspense } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import AboutPage from './pages/About';
 import CardWrapper from './components/CardWrapper';
 import styles from './App.module.css';
-import AddProfilePage from "./pages/AddProfilePage"; 
 import HomePage from './pages/HomePage';
 import FetchedProfilesPage from './pages/FetchedProfilesPage'; 
-import ProfileDetail from './pages/ProfileDetail'; 
-import NotFound from './pages/NotFound';
 import { Routes, Route } from "react-router-dom";
 import ModeContext from './context/ModeContext';
+
+const LazyAboutPage = lazy(() => import('./pages/About'));
+const LazyAddProfilePage = lazy(() => import('./pages/AddProfilePage'));
+const LazyProfileDetail = lazy(() => import('./pages/ProfileDetail'));
+const LazyNotFound = lazy(() => import('./pages/NotFound'));
  
 function App() {
   const { mode } = useContext(ModeContext);
  
      return (
-    <div className={styles.app}>
+    <div className={`${styles.app} ${styles[mode]}`}>
       <header>
         <Navbar />
       </header>
@@ -24,12 +25,39 @@ function App() {
         <CardWrapper id="header" className={styles.cardWrapper}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/addprofile" element={<AddProfilePage />} />
             <Route path="/fetched-profiles" element={<FetchedProfilesPage />} />
-            <Route path="/fetched-profiles/profile/:profileId" element={<ProfileDetail />} />
-
-            <Route path="*" element={<NotFound />} />
+            <Route 
+              path="/about" 
+              element={
+                <Suspense fallback={<div>Loading About Page...</div>}>
+                  <LazyAboutPage />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/addprofile" 
+              element={
+                <Suspense fallback={<div>Loading Add Profile Page...</div>}>
+                  <LazyAddProfilePage />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/fetched-profiles/profile/:profileId" 
+              element={
+                <Suspense fallback={<div>Loading Profile Details...</div>}>
+                  <LazyProfileDetail />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="*" 
+              element={
+                <Suspense fallback={<div>Loading Not Found Page...</div>}>
+                  <LazyNotFound />
+                </Suspense>
+              } 
+            />
           </Routes>
         </CardWrapper>
       </main>

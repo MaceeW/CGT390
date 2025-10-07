@@ -1,4 +1,5 @@
 import styles from '../styles/filters.module.css';
+import { memo } from 'react';
 
 const Filters = ({ titles, selectedTitle, onTitleChange }) => {
 
@@ -24,4 +25,4 @@ const Filters = ({ titles, selectedTitle, onTitleChange }) => {
   );
 };
 
-export default Filters;
+export default memo(Filters);

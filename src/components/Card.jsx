@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, memo } from 'react';
 import styles from '../styles/card.module.css';
 import { Link } from 'react-router-dom'; 
 
@@ -36,4 +36,5 @@ Card.propTypes ={
     email: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired
 }
-export default Card;
+
+export default memo(Card);
