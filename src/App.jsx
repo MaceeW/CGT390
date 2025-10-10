@@ -1,12 +1,12 @@
-import { useContext, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import CardWrapper from './components/CardWrapper';
 import styles from './App.module.css';
 import HomePage from './pages/HomePage';
 import FetchedProfilesPage from './pages/FetchedProfilesPage'; 
-import { Routes, Route } from "react-router-dom";
-import ModeContext from './context/ModeContext';
+import { Routes, Route } from 'react-router-dom';
+import useMode from './hooks/useMode';
 
 const LazyAboutPage = lazy(() => import('./pages/About'));
 const LazyAddProfilePage = lazy(() => import('./pages/AddProfilePage'));
@@ -14,7 +14,7 @@ const LazyProfileDetail = lazy(() => import('./pages/ProfileDetail'));
 const LazyNotFound = lazy(() => import('./pages/NotFound'));
  
 function App() {
-  const { mode } = useContext(ModeContext);
+  const { mode } = useMode();
  
      return (
     <div className={`${styles.app} ${styles[mode]}`}>
