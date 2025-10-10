@@ -1,1 +1,0 @@
-import{j as o}from"./index-CD7pifUv.js";const r=()=>o.jsxs("div",{children:[o.jsx("h2",{children:"404 Not Found"}),o.jsx("p",{children:"The page you are looking for does not exist."})]});export{r as default};
